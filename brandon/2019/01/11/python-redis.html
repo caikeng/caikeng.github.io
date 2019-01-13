@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>python redis setex指令 执行不成功</title>
-    <meta name="description" content="问题描述">
+    <meta name="description" content="问题描述: Python 项目，调用 redis.setex 函数设置缓存后，通过 redis-cli 查看，发现并没有设置成功。">
     <link rel="canonical" href="http://localhost:4000/brandon/2019/01/11/python-redis.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
@@ -63,11 +63,9 @@
     
 </div>
 <div class="row">
-<h4 id="问题描述">问题描述</h4>
+<p><strong>问题描述:</strong> Python 项目，调用 <code class="highlighter-rouge">redis.setex</code> 函数设置缓存后，通过 <code class="highlighter-rouge">redis-cli</code> 查看，发现并没有设置成功。</p>
 
-<p>Python 项目，调用 <code class="highlighter-rouge">redis.setex</code> 函数设置缓存后，通过 <code class="highlighter-rouge">redis-cli</code> 查看，发现并没有设置成功。</p>
-
-<h4 id="解决">解决:</h4>
+<p><strong>解决步骤:</strong></p>
 
 <ol>
   <li>
@@ -78,7 +76,7 @@
   <li>
     <p>再次通过 redis-cli 查看</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 127.0.0.1:6379&gt; <span class="k">select </span>0
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 127.0.0.1:6379[1]&gt; <span class="k">select </span>0
  127.0.0.1:6379&gt; keys <span class="k">*</span>
 </code></pre></div>    </div>
 
@@ -105,7 +103,7 @@
   </li>
 </ol>
 
-<h4 id="总结">总结</h4>
+<p><strong>总结</strong></p>
 
 <ul>
   <li>

@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>ffmpeg 转换 mp4 自定义start的值</title>
-    <meta name="description" content="">
+    <meta name="description" content="问题描述:">
     <link rel="canonical" href="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -61,7 +63,45 @@
     
 </div>
 <div class="row">
+<p><strong>问题描述:</strong></p>
 
+<p>一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。</p>
+
+<p><strong>解决步骤:</strong></p>
+
+<ol>
+  <li>
+    <p>从网上找了一段正常的视频，使用 ffmpeg 对比了正常的视频各个 ts 文件的元数据和本地不正常的视频各个 ts 文件的元数据。
+发现正常视频片段的 start 值是连续的，不正常的视频片段的 start 值都是固定的，由此认为 start 决定了进度条的初始位置。</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ffmpeg version 4.1-tessus  https://evermeet.cx/ffmpeg/  Copyright <span class="o">(</span>c<span class="o">)</span> 2000-2018 the FFmpeg developers
+   built with Apple LLVM version 10.0.0 <span class="o">(</span>clang-1000.11.45.5<span class="o">)</span>
+   configuration: <span class="nt">--cc</span><span class="o">=</span>/usr/bin/clang <span class="nt">--prefix</span><span class="o">=</span>/opt/ffmpeg <span class="nt">--extra-version</span><span class="o">=</span>tessus <span class="nt">--enable-avisynth</span> <span class="nt">--enable-fontconfig</span> <span class="nt">--enable-gpl</span> <span class="nt">--enable-libaom</span> <span class="nt">--enable-libass</span> <span class="nt">--enable-libbluray</span> <span class="nt">--enable-libfreetype</span> <span class="nt">--enable-libgsm</span> <span class="nt">--enable-libmodplug</span> <span class="nt">--enable-libmp3lame</span> <span class="nt">--enable-libmysofa</span> <span class="nt">--enable-libopencore-amrnb</span> <span class="nt">--enable-libopencore-amrwb</span> <span class="nt">--enable-libopus</span> <span class="nt">--enable-librubberband</span> <span class="nt">--enable-libshine</span> <span class="nt">--enable-libsnappy</span> <span class="nt">--enable-libsoxr</span> <span class="nt">--enable-libspeex</span> <span class="nt">--enable-libtheora</span> <span class="nt">--enable-libtwolame</span> <span class="nt">--enable-libvidstab</span> <span class="nt">--enable-libvo-amrwbenc</span> <span class="nt">--enable-libvorbis</span> <span class="nt">--enable-libvpx</span> <span class="nt">--enable-libwavpack</span> <span class="nt">--enable-libx264</span> <span class="nt">--enable-libx265</span> <span class="nt">--enable-libxavs</span> <span class="nt">--enable-libxvid</span> <span class="nt">--enable-libzimg</span> <span class="nt">--enable-libzmq</span> <span class="nt">--enable-libzvbi</span> <span class="nt">--enable-version3</span> <span class="nt">--pkg-config-flags</span><span class="o">=</span><span class="nt">--static</span> <span class="nt">--disable-ffplay</span>
+   libavutil      56. 22.100 / 56. 22.100
+   libavcodec     58. 35.100 / 58. 35.100
+   libavformat    58. 20.100 / 58. 20.100
+   libavdevice    58.  5.100 / 58.  5.100
+   libavfilter     7. 40.101 /  7. 40.101
+   libswscale      5.  3.100 /  5.  3.100
+   libswresample   3.  3.100 /  3.  3.100
+   libpostproc    55.  3.100 / 55.  3.100
+ Input <span class="c">#0, mpegts, from 'b.ts':</span>
+   Duration: 00:00:10.00, start: 11.400000
+   , bitrate: 1879 kb/s
+   Program 1 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>想修改视频的 start 值， 经高人指点发现使用如下方式可以修改。
+这条命令是将 mp4 文件转换为 ts 文件，同时使用 <strong>initial_offset</strong> 参数指定第一个视频文件的 start 值。</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ffmpeg <span class="nt">-i</span> 0.mp4 <span class="nt">-vcodec</span> copy <span class="nt">-acodec</span> aac <span class="nt">-f</span> segment <span class="nt">-initial_offset</span> 9.5 <span class="nt">-segment_format</span> mpegts out%d.ts
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>使用如上配置生成的 ts 文件播放后进度条就不跳跃了，问题得到解决。</p>
+  </li>
+</ol>
 
 </div>
     </div>
@@ -94,6 +134,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>

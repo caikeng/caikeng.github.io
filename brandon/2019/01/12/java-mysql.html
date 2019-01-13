@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>java mysql 插入数据 阻塞</title>
-    <meta name="description" content="">
+    <meta name="description" content="Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。">
     <link rel="canonical" href="http://localhost:4000/brandon/2019/01/12/java-mysql.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -61,7 +63,73 @@
     
 </div>
 <div class="row">
+<p>Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。</p>
 
+<h4 id="解决步骤">解决步骤</h4>
+
+<ol>
+  <li>
+    <p>使用客户端工具登入mysql</p>
+  </li>
+  <li>
+    <p>查看正在执行的语句</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">show</span> <span class="n">processlist</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>显示如下信息:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>User</th>
+          <th>Host</th>
+          <th>db</th>
+          <th>Command</th>
+          <th>Time</th>
+          <th>State</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>*</td>
+          <td>*</td>
+          <td>*</td>
+          <td>*</td>
+          <td>Query</td>
+          <td>131</td>
+          <td>Starting</td>
+          <td>Commit</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>搜索上述信息的含义：</p>
+
+    <ul>
+      <li>Command=Query 表示有语句正在执行；</li>
+      <li>State=Starting 官方文档没有介绍</li>
+      <li>Info=Commit 官方文档没有介绍</li>
+    </ul>
+
+    <p>看完并没有什么头绪。</p>
+  </li>
+  <li>
+    <p>鼓捣了半天，发现是磁盘满了, 想删除一些没用数据，结果还是不行。因为连undo日志都没地方放了。</p>
+  </li>
+  <li>
+    <p>磁盘扩容后一切正常。</p>
+  </li>
+</ol>
+
+<h4 id="补充">补充</h4>
+
+<ul>
+  <li>好奇怪，没有超时时间吗，程序一直阻塞着。</li>
+</ul>
 
 </div>
     </div>
@@ -94,6 +162,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>

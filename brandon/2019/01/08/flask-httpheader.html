@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>Flask 无法获取请求头数据</title>
-    <meta name="description" content="">
+    <meta name="description" content="问题描述: 使用如下代码获取请求头中的数据，拿不到值（客户端也使用 http_token）">
     <link rel="canonical" href="http://localhost:4000/brandon/2019/01/08/flask-httpheader.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -65,7 +67,33 @@
     
 </div>
 <div class="row">
+<p><strong>问题描述:</strong> 使用如下代码获取请求头中的数据，拿不到值（客户端也使用 http_token）</p>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http_token</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_all</span><span class="p">(</span><span class="s">"http_token"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>解决步骤:</strong></p>
+
+<ol>
+  <li>
+    <p>打印请求头中的数据</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>发现客户端无论使用 <code class="highlighter-rouge">http-token</code> 还是 <code class="highlighter-rouge">http_token</code> 请求头在服务端都变成了”Http-Token”。</p>
+  </li>
+  <li>
+    <p>在服务端修改，使用如下代码获取请求头中的数据，问题解决</p>
+  </li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http_token</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_all</span><span class="p">(</span><span class="s">"http-token"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>总结:</strong></p>
+
+<p>看来是 Flask 自动把请求头的格式修改了。</p>
 
 </div>
     </div>
@@ -98,6 +126,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>

@@ -1,8 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-13T11:25:46+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">java mysql 插入数据 阻塞</title><link href="http://localhost:4000/brandon/2019/01/12/java-mysql.html" rel="alternate" type="text/html" title="java mysql 插入数据 阻塞" /><published>2019-01-12T00:00:00+08:00</published><updated>2019-01-12T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/12/java-mysql</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/12/java-mysql.html"></content><author><name></name></author><category term="Java" /><category term="Mysql" /><summary type="html"></summary></entry><entry><title type="html">python redis setex指令 执行不成功</title><link href="http://localhost:4000/brandon/2019/01/11/python-redis.html" rel="alternate" type="text/html" title="python redis setex指令 执行不成功" /><published>2019-01-11T00:00:00+08:00</published><updated>2019-01-11T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/11/python-redis</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/11/python-redis.html">&lt;h4 id=&quot;问题描述&quot;&gt;问题描述&lt;/h4&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-13T16:15:02+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">java mysql 插入数据 阻塞</title><link href="http://localhost:4000/brandon/2019/01/12/java-mysql.html" rel="alternate" type="text/html" title="java mysql 插入数据 阻塞" /><published>2019-01-12T00:00:00+08:00</published><updated>2019-01-12T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/12/java-mysql</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/12/java-mysql.html">&lt;p&gt;Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。&lt;/p&gt;
 
-&lt;p&gt;Python 项目，调用 &lt;code class=&quot;highlighter-rouge&quot;&gt;redis.setex&lt;/code&gt; 函数设置缓存后，通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;redis-cli&lt;/code&gt; 查看，发现并没有设置成功。&lt;/p&gt;
+&lt;h4 id=&quot;解决步骤&quot;&gt;解决步骤&lt;/h4&gt;
 
-&lt;h4 id=&quot;解决&quot;&gt;解决:&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用客户端工具登入mysql&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;查看正在执行的语句&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;processlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;显示如下信息:&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Id&lt;/th&gt;
+          &lt;th&gt;User&lt;/th&gt;
+          &lt;th&gt;Host&lt;/th&gt;
+          &lt;th&gt;db&lt;/th&gt;
+          &lt;th&gt;Command&lt;/th&gt;
+          &lt;th&gt;Time&lt;/th&gt;
+          &lt;th&gt;State&lt;/th&gt;
+          &lt;th&gt;Info&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;*&lt;/td&gt;
+          &lt;td&gt;*&lt;/td&gt;
+          &lt;td&gt;*&lt;/td&gt;
+          &lt;td&gt;*&lt;/td&gt;
+          &lt;td&gt;Query&lt;/td&gt;
+          &lt;td&gt;131&lt;/td&gt;
+          &lt;td&gt;Starting&lt;/td&gt;
+          &lt;td&gt;Commit&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;搜索上述信息的含义：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Command=Query 表示有语句正在执行；&lt;/li&gt;
+      &lt;li&gt;State=Starting 官方文档没有介绍&lt;/li&gt;
+      &lt;li&gt;Info=Commit 官方文档没有介绍&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;看完并没有什么头绪。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;鼓捣了半天，发现是磁盘满了, 想删除一些没用数据，结果还是不行。因为连undo日志都没地方放了。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;磁盘扩容后一切正常。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;补充&quot;&gt;补充&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;好奇怪，没有超时时间吗，程序一直阻塞着。&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Java" /><category term="Mysql" /><summary type="html">Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。</summary></entry><entry><title type="html">python redis setex指令 执行不成功</title><link href="http://localhost:4000/brandon/2019/01/11/python-redis.html" rel="alternate" type="text/html" title="python redis setex指令 执行不成功" /><published>2019-01-11T00:00:00+08:00</published><updated>2019-01-11T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/11/python-redis</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/11/python-redis.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt; Python 项目，调用 &lt;code class=&quot;highlighter-rouge&quot;&gt;redis.setex&lt;/code&gt; 函数设置缓存后，通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;redis-cli&lt;/code&gt; 查看，发现并没有设置成功。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -13,7 +77,7 @@
   &lt;li&gt;
     &lt;p&gt;再次通过 redis-cli 查看&lt;/p&gt;
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 127.0.0.1:6379&amp;gt; &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;0
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 127.0.0.1:6379[1]&amp;gt; &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;0
  127.0.0.1:6379&amp;gt; keys &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
@@ -40,7 +104,7 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;总结&quot;&gt;总结&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -55,4 +119,68 @@
   &lt;li&gt;
     &lt;p&gt;Python redis 函数中的参数顺序与 &lt;code class=&quot;highlighter-rouge&quot;&gt;redis-cli&lt;/code&gt; 中的参数顺序一致。&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Python" /><category term="Redis" /><summary type="html">问题描述</summary></entry><entry><title type="html">Flask 无法获取请求头数据</title><link href="http://localhost:4000/brandon/2019/01/08/flask-httpheader.html" rel="alternate" type="text/html" title="Flask 无法获取请求头数据" /><published>2019-01-08T00:00:00+08:00</published><updated>2019-01-08T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/08/flask-httpheader</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/08/flask-httpheader.html"></content><author><name></name></author><category term="Python" /><category term="Flash" /><category term="Http" /><summary type="html"></summary></entry><entry><title type="html">Welcome to CaiKeng!</title><link href="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html" rel="alternate" type="text/html" title="Welcome to CaiKeng!" /><published>2019-01-01T00:00:00+08:00</published><updated>2019-01-01T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html">&lt;p&gt;欢迎来到踩坑，这是一个分享踩坑经历的地方。&lt;/p&gt;</content><author><name></name></author><category term="introduce" /><category term="sticky" /><summary type="html">欢迎来到踩坑，这是一个分享踩坑经历的地方。</summary></entry><entry><title type="html">ffmpeg 转换 mp4 自定义start的值</title><link href="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html" rel="alternate" type="text/html" title="ffmpeg 转换 mp4 自定义start的值" /><published>2018-12-26T00:00:00+08:00</published><updated>2018-12-26T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2018/12/26/ffmpeg-start</id><content type="html" xml:base="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html"></content><author><name></name></author><category term="ffmpeg" /><category term="hls" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="Python" /><category term="Redis" /><summary type="html">问题描述: Python 项目，调用 redis.setex 函数设置缓存后，通过 redis-cli 查看，发现并没有设置成功。</summary></entry><entry><title type="html">Flask 无法获取请求头数据</title><link href="http://localhost:4000/brandon/2019/01/08/flask-httpheader.html" rel="alternate" type="text/html" title="Flask 无法获取请求头数据" /><published>2019-01-08T00:00:00+08:00</published><updated>2019-01-08T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/08/flask-httpheader</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/08/flask-httpheader.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt; 使用如下代码获取请求头中的数据，拿不到值（客户端也使用 http_token）&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;http_token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http_token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;打印请求头中的数据&lt;/p&gt;
+
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;发现客户端无论使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;http-token&lt;/code&gt; 还是 &lt;code class=&quot;highlighter-rouge&quot;&gt;http_token&lt;/code&gt; 请求头在服务端都变成了”Http-Token”。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在服务端修改，使用如下代码获取请求头中的数据，问题解决&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;http_token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http-token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;总结:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;看来是 Flask 自动把请求头的格式修改了。&lt;/p&gt;</content><author><name></name></author><category term="Python" /><category term="Flash" /><category term="Http" /><summary type="html">问题描述: 使用如下代码获取请求头中的数据，拿不到值（客户端也使用 http_token）</summary></entry><entry><title type="html">Welcome to CaiKeng!</title><link href="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html" rel="alternate" type="text/html" title="Welcome to CaiKeng!" /><published>2019-01-01T00:00:00+08:00</published><updated>2019-01-01T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html">&lt;p&gt;欢迎来到踩坑，这是一个分享踩坑经历的地方。&lt;/p&gt;</content><author><name></name></author><category term="introduce" /><category term="sticky" /><summary type="html">欢迎来到踩坑，这是一个分享踩坑经历的地方。</summary></entry><entry><title type="html">ffmpeg 转换 mp4 自定义start的值</title><link href="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html" rel="alternate" type="text/html" title="ffmpeg 转换 mp4 自定义start的值" /><published>2018-12-26T00:00:00+08:00</published><updated>2018-12-26T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2018/12/26/ffmpeg-start</id><content type="html" xml:base="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;从网上找了一段正常的视频，使用 ffmpeg 对比了正常的视频各个 ts 文件的元数据和本地不正常的视频各个 ts 文件的元数据。
+发现正常视频片段的 start 值是连续的，不正常的视频片段的 start 值都是固定的，由此认为 start 决定了进度条的初始位置。&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ffmpeg version 4.1-tessus  https://evermeet.cx/ffmpeg/  Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000-2018 the FFmpeg developers
+   built with Apple LLVM version 10.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-1000.11.45.5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   configuration: &lt;span class=&quot;nt&quot;&gt;--cc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/bin/clang &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/ffmpeg &lt;span class=&quot;nt&quot;&gt;--extra-version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;tessus &lt;span class=&quot;nt&quot;&gt;--enable-avisynth&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-fontconfig&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-gpl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libaom&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libass&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libbluray&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libfreetype&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libgsm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmodplug&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmp3lame&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmysofa&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopencore-amrnb&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopencore-amrwb&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopus&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-librubberband&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libshine&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libsnappy&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libsoxr&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libspeex&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libtheora&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libtwolame&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvidstab&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvo-amrwbenc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvorbis&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvpx&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libwavpack&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libx264&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libx265&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libxavs&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libxvid&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzimg&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzmq&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzvbi&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-version3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pkg-config-flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--static&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--disable-ffplay&lt;/span&gt;
+   libavutil      56. 22.100 / 56. 22.100
+   libavcodec     58. 35.100 / 58. 35.100
+   libavformat    58. 20.100 / 58. 20.100
+   libavdevice    58.  5.100 / 58.  5.100
+   libavfilter     7. 40.101 /  7. 40.101
+   libswscale      5.  3.100 /  5.  3.100
+   libswresample   3.  3.100 /  3.  3.100
+   libpostproc    55.  3.100 / 55.  3.100
+ Input &lt;span class=&quot;c&quot;&gt;#0, mpegts, from 'b.ts':&lt;/span&gt;
+   Duration: 00:00:10.00, start: 11.400000
+   , bitrate: 1879 kb/s
+   Program 1 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;想修改视频的 start 值， 经高人指点发现使用如下方式可以修改。
+这条命令是将 mp4 文件转换为 ts 文件，同时使用 &lt;strong&gt;initial_offset&lt;/strong&gt; 参数指定第一个视频文件的 start 值。&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 0.mp4 &lt;span class=&quot;nt&quot;&gt;-vcodec&lt;/span&gt; copy &lt;span class=&quot;nt&quot;&gt;-acodec&lt;/span&gt; aac &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; segment &lt;span class=&quot;nt&quot;&gt;-initial_offset&lt;/span&gt; 9.5 &lt;span class=&quot;nt&quot;&gt;-segment_format&lt;/span&gt; mpegts out%d.ts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用如上配置生成的 ts 文件播放后进度条就不跳跃了，问题得到解决。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="ffmpeg" /><category term="hls" /><summary type="html">问题描述:</summary></entry></feed>
