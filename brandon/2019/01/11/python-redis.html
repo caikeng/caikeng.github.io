@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Python, Redis"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png">
+    <title>python redis setex指令 执行不成功</title>
+    <meta name="description" content="问题描述">
+    <link rel="canonical" href="http://localhost:4000/brandon/2019/01/11/python-redis.html" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
+	
+    <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
+</head>
+
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container"><a href="#" data-activates="nav-bar" class="button-collapse"><i class="material-icons">menu</i></a></div>
+            <ul class="right hide-on-med-and-down ">
+                
+                <li><a href="/">Home</a></li>
+                
+                <li><a href="/categories.html">Categories</a></li>
+                
+                <li><a href="/tags.html">Tags</a></li>
+                
+            </ul>
+            <ul class="side-nav" id="nav-bar">
+                
+                <li><a href="/">Home</a></li>
+                
+                <li><a href="/categories.html">Categories</a></li>
+                
+                <li><a href="/tags.html">Tags</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+</header>
+<br/>
+<main>
+    <div class="container">
+        
+<div class="row">
+<h2>python redis setex指令 执行不成功</h2>
+<div class="valign-wrapper">
+<div class="author"><img src="/img/author.png" class="circle responsive-img"></div> <h5><a href="/categories/Brandon">Brandon</a> - 01/11/2019</h5>
+</div>
+    
+    
+    <a href="/tags/Python"><div class="chip waves-effect waves-red">Python</div></a>
+    
+    
+    
+    <a href="/tags/Redis"><div class="chip waves-effect waves-red">Redis</div></a>
+    
+    
+</div>
+<div class="row">
+<h4 id="问题描述">问题描述</h4>
+
+<p>Python 项目，调用 <code class="highlighter-rouge">redis.setex</code> 函数设置缓存后，通过 <code class="highlighter-rouge">redis-cli</code> 查看，发现并没有设置成功。</p>
+
+<h4 id="解决">解决:</h4>
+
+<ol>
+  <li>
+    <p>查看 db 配置</p>
+
+    <p>发现 db 使用的默认配置，也就是 0</p>
+  </li>
+  <li>
+    <p>再次通过 redis-cli 查看</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 127.0.0.1:6379&gt; <span class="k">select </span>0
+ 127.0.0.1:6379&gt; keys <span class="k">*</span>
+</code></pre></div>    </div>
+
+    <p>还是没有。</p>
+  </li>
+  <li>
+    <p>查看<code class="highlighter-rouge">setex</code>函数，函数定义如下：</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">setex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>查看调用代码:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">expire</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>发现，参数顺序写反了，改正：</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expire</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>改正之后，设置成功。</p>
+  </li>
+</ol>
+
+<h4 id="总结">总结</h4>
+
+<ul>
+  <li>
+    <p>参数写反了，执行却返回 <code class="highlighter-rouge">True</code> , 没有抛出异常。</p>
+  </li>
+  <li>
+    <p>使用 <code class="highlighter-rouge">Spring</code> 写多了项目，习惯了下面的参数顺序:</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Python redis 函数中的参数顺序与 <code class="highlighter-rouge">redis-cli</code> 中的参数顺序一致。</p>
+  </li>
+</ul>
+
+</div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">CaiKeng</h5>
+                <p class="grey-text text-lighten-4">Power by jekyll theme Jekyll-Avalon.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Concat</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/caikeng">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2019 caikeng
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
+<script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
+
+</body>
+</html>
