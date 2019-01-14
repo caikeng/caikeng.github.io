@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>ffmpeg 转换 mp4 自定义start的值</title>
-    <meta name="description" content="问题描述:">
+    <meta name="description" content="问题描述:一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。">
     <link rel="canonical" href="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
@@ -63,9 +63,8 @@
     
 </div>
 <div class="row">
-<p><strong>问题描述:</strong></p>
-
-<p>一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。</p>
+<p><strong>问题描述:</strong>
+一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。</p>
 
 <p><strong>解决步骤:</strong></p>
 
