@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-14T11:29:19+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">java mysql 插入数据 阻塞</title><link href="http://localhost:4000/brandon/2019/01/12/java-mysql.html" rel="alternate" type="text/html" title="java mysql 插入数据 阻塞" /><published>2019-01-12T00:00:00+08:00</published><updated>2019-01-12T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/12/java-mysql</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/12/java-mysql.html">&lt;p&gt;Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-20T20:26:37+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">启动docker容器</title><link href="http://localhost:4000/holmes/2019/01/20/docker-container-start.html" rel="alternate" type="text/html" title="启动docker容器" /><published>2019-01-20T00:00:00+08:00</published><updated>2019-01-20T00:00:00+08:00</updated><id>http://localhost:4000/holmes/2019/01/20/docker-container-start</id><content type="html" xml:base="http://localhost:4000/holmes/2019/01/20/docker-container-start.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;
+重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。
+    &lt;code class=&quot;highlighter-rouge&quot;&gt;shell
+    Error response from daemon：Cannot start container 2c36e8c5614：
+      [8]System error：Unit 2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope already exists
+   &lt;/code&gt;
+&lt;strong&gt;原因:&lt;/strong&gt;
+容器异常退出。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;```shell
+1、systemctl stop docker-2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope
+2、docker start 2c36eb8c5614
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="docker" /><summary type="html">问题描述: 重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。 shell Error response from daemon：Cannot start container 2c36e8c5614： [8]System error：Unit 2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope already exists 原因: 容器异常退出。</summary></entry><entry><title type="html">java mysql 插入数据 阻塞</title><link href="http://localhost:4000/brandon/2019/01/12/java-mysql.html" rel="alternate" type="text/html" title="java mysql 插入数据 阻塞" /><published>2019-01-12T00:00:00+08:00</published><updated>2019-01-12T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/12/java-mysql</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/12/java-mysql.html">&lt;p&gt;Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。&lt;/p&gt;
 
 &lt;h4 id=&quot;解决步骤&quot;&gt;解决步骤&lt;/h4&gt;
 
