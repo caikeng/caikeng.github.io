@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ffmpeg, hls, introduce, sticky, Java, Logback, Python, Flash, Http, Redis, Mysql, docker, registry"/>
+    <meta name="keywords" content="docker, registry"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
-    <title>caikeng</title>
-    <meta name="description" content="踩坑之路">
-    <link rel="canonical" href="http://localhost:4000/tags/sticky/" />
+    <title>上传镜像到私有仓库</title>
+    <meta name="description" content="问题描述:">
+    <link rel="canonical" href="http://localhost:4000/holmes/2019/01/21/push-image-registry.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -45,107 +47,52 @@
 <main>
     <div class="container">
         
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-        
-    
-
-    
-
-
-
 <div class="row">
-    <div class="slider">
-        <ul class="slides">
-            
-            <li>
-                <a href="/brandon/2019/01/01/welcome-to-caikeng.html"><img class='lazy ' data-original='/img/bg.jpg'></a>
-                <div class="caption center-align">
-                    <h3>Welcome to CaiKeng!</h3>
-                </div>
-            </li>
-            
-        </ul>
-    </div>
+<h2>上传镜像到私有仓库</h2>
+<div class="valign-wrapper">
+<div class="author"><img src="/img/Holmes.png" class="circle responsive-img"></div> <h5><a href="/categories/Holmes">Holmes</a> - 01/21/2019</h5>
 </div>
-
-<div class="row">
     
-    <div class="col s12 m6">
-        <div class="card medium sticky-action hoverable">
-            
-            <div class="card-image">
-                <img class='lazy ' data-original='/img/bg.jpg'>
-            </div>
-            
-            <div class="card-content">
-                <span class="card-title grey-text text-darken-4 truncate activator">Welcome to CaiKeng!</span>
-                <div class="valign-wrapper">
-                <div class="author"><img src="/img/Brandon_s.png" class="circle responsive-img"></div>
-				<div><a href="/categories/Brandon">Brandon</a> - 01/01/2019</div>
-                </div>
-                
-            </div>
-            <div class="card-action"><a href="/brandon/2019/01/01/welcome-to-caikeng.html">Read More</a></div>
-            
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4 truncate">Welcome to CaiKeng!<i class="material-icons right">close</i></span>
-                <div class="row valign-wrapper">
-                    <div class="author"><img src="/img/Brandon_s.png" class="circle responsive-img"></div> <a href="/categories/Brandon">Brandon</a> - 01/01/2019
-                </div>
-                
-                <a href="/tags/introduce"><div class="chip waves-effect waves-red">introduce</div></a>
-                
-                <a href="/tags/sticky"><div class="chip waves-effect waves-red">sticky</div></a>
-                
-                <p class="truncate"><p>欢迎来到踩坑，这是一个分享踩坑经历的地方。</p>
-
- </p>
-            </div>
-            
-        </div>
-    </div>
+    
+    <a href="/tags/docker"><div class="chip waves-effect waves-red">docker</div></a>
+    
+    
+    
+    <a href="/tags/registry"><div class="chip waves-effect waves-red">registry</div></a>
+    
     
 </div>
-
 <div class="row">
-    <div class="center-align">
-        <ul class="pagination">
-            
-				<li class="disabled">
-			
-			<a >
-			<i class="material-icons">chevron_left</i>
-			</a>
-			</li>
-            
-            <li class="active">
-            <a>
-                1</a></li>
-            
-			
-				<li class="disabled">
-			
-			<a >
-			<i class="material-icons">chevron_right</i>
-			</a>
-			</li>
-        </ul>
-    </div>
+<p><strong>问题描述:</strong></p>
+
+<p>​	通过命令行docker push 192.168.215.200:5000/java:latest将镜像推送到另一台主机搭建的私有仓库中。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Get https://192.168.215.200:5000/v1/_ping: http: server gave HTTP response to HTTPS client
+</code></pre></div></div>
+
+<p><strong>原因:</strong>
+	为了保证安全，跨机的镜像推送操作默认采用的都是https协议。客户端采用https，而docker registry未采用https服务所致。</p>
+
+<p><strong>解决步骤:</strong></p>
+<ol>
+  <li>
+    <p>insecure registry配置
+  在文件/etc/docker/daemon.json中添加一下内容</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">{</span>
+        <span class="s2">"insecure-registries"</span>:[
+            <span class="s2">"192.168.215.200:5000"</span>
+        <span class="o">]</span>
+    <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>secure registry
+<a href="https://www.cnblogs.com/xcloudbiz/articles/5526262.html">喜欢我就戳我</a></p>
+  </li>
+</ol>
+
+
 </div>
     </div>
 </main>
@@ -178,6 +125,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>

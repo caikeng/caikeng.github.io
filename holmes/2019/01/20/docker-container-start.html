@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
     <title>启动docker容器</title>
-    <meta name="description" content="问题描述:重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。    shell    Error response from daemon：Cannot start container 2c36e8c5614： ...">
+    <meta name="description" content="问题描述:	重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。">
     <link rel="canonical" href="http://localhost:4000/holmes/2019/01/20/docker-container-start.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
@@ -50,7 +50,7 @@
 <div class="row">
 <h2>启动docker容器</h2>
 <div class="valign-wrapper">
-<div class="author"><img src="/img/author.png" class="circle responsive-img"></div> <h5><a href="/categories/Holmes">Holmes</a> - 01/20/2019</h5>
+<div class="author"><img src="/img/Holmes.png" class="circle responsive-img"></div> <h5><a href="/categories/Holmes">Holmes</a> - 01/20/2019</h5>
 </div>
     
     
@@ -60,20 +60,18 @@
 </div>
 <div class="row">
 <p><strong>问题描述:</strong>
-重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。
-    <code class="highlighter-rouge">shell
-    Error response from daemon：Cannot start container 2c36e8c5614：
-      [8]System error：Unit 2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope already exists
-   </code>
-<strong>原因:</strong>
-容器异常退出。</p>
+	重启Linux系统，发现某个容器停止，然后通过命令docker start 2c36e8c5614(containerId)重新启动容器，报错信息如下。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error response from daemon：Cannot start container 2c36e8c5614：[8]System error：Unit 2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope already exists
+</code></pre></div></div>
+
+<p><strong>原因:</strong>
+	容器异常退出。</p>
 
 <p><strong>解决步骤:</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```shell
-1、systemctl stop docker-2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1、systemctl stop docker-2c36eb8c56148b2ee2ec2e42c0f2c690d561ab1ac9773920bada4ffde064faf3.scope
 2、docker start 2c36eb8c5614
-```
 </code></pre></div></div>
 
 </div>
