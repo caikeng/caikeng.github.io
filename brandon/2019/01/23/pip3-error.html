@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ffmpeg, hls, introduce, sticky, Java, Logback, Python, Flash, Http, Redis, Mysql, docker, registry, python, pip"/>
+    <meta name="keywords" content="python, pip"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
-    <title>caikeng</title>
-    <meta name="description" content="踩坑之路">
-    <link rel="canonical" href="http://localhost:4000/tags/Mysql/" />
+    <title>pip3 安装 module 失败</title>
+    <meta name="description" content="mac 操作系统， pip3 安装 flask 模块报错: [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol versionissuserdeMacBook-Pro:~ issuser$ pip3 install flaskCollecting fl...">
+    <link rel="canonical" href="http://localhost:4000/brandon/2019/01/23/pip3-error.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -45,88 +47,44 @@
 <main>
     <div class="container">
         
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-        
-    
-
-    
-
-
-
 <div class="row">
+<h2>pip3 安装 module 失败</h2>
+<div class="valign-wrapper">
+<div class="author"><img src="/img/brandon.png" class="circle responsive-img"></div> <h5><a href="/categories/Brandon">Brandon</a> - 01/23/2019</h5>
+</div>
     
-    <div class="col s12 m6">
-        <div class="card medium sticky-action hoverable">
-            
-            <div class="card-content">
-                <span class="card-title grey-text text-darken-4 truncate ">java mysql 插入数据 阻塞</span>
-                <div class="valign-wrapper">
-                <div class="author"><img src="/img/brandon_s.png" class="circle responsive-img"></div>
-				<div><a href="/categories/Brandon">Brandon</a> - 01/12/2019</div>
-                </div>
-                
-                
-                
-                <a href="/tags/Java"><div class="chip waves-effect waves-red">Java</div></a>
-                
-                
-                
-                <a href="/tags/Mysql"><div class="chip waves-effect waves-red">Mysql</div></a>
-                
-                
-                <p class="truncate"><p>Java 项目，使用 MyBatis 向 MySQL 中插入数据时，线程阻塞住了，很长时间都不返回。</p>
-
- </p>
-                
-            </div>
-            <div class="card-action"><a href="/brandon/2019/01/12/java-mysql.html">Read More</a></div>
-            
-        </div>
-    </div>
+    
+    <a href="/tags/python"><div class="chip waves-effect waves-red">python</div></a>
+    
+    
+    
+    <a href="/tags/pip"><div class="chip waves-effect waves-red">pip</div></a>
+    
     
 </div>
-
 <div class="row">
-    <div class="center-align">
-        <ul class="pagination">
-            
-				<li class="disabled">
-			
-			<a >
-			<i class="material-icons">chevron_left</i>
-			</a>
-			</li>
-            
-            <li class="active">
-            <a>
-                1</a></li>
-            
-			
-				<li class="disabled">
-			
-			<a >
-			<i class="material-icons">chevron_right</i>
-			</a>
-			</li>
-        </ul>
-    </div>
+<p>mac 操作系统， pip3 安装 flask 模块报错: <strong>[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>issuserdeMacBook-Pro:~ issuser<span class="nv">$ </span>pip3 <span class="nb">install </span>flask
+Collecting flask
+  Could not fetch URL https://pypi.python.org/simple/flask/: There was a problem confirming the ssl certificate: <span class="o">[</span>SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version <span class="o">(</span>_ssl.c:590<span class="o">)</span> - skipping
+  Could not find a version that satisfies the requirement flask <span class="o">(</span>from versions: <span class="o">)</span>
+No matching distribution found <span class="k">for </span>flask
+</code></pre></div></div>
+
+<p><strong>解决方案:</strong></p>
+
+<ol>
+  <li>
+    <p>出现这个错误的原因是 python.org 已经不支持 TLSv1.0 和 TLSv1.1 了更新 <code class="highlighter-rouge">pip</code> 可以解决这个问题。但是如果使用传统的python3 -m pip install –upgrade pip的方式，还是会出现那个问题。这是因为TLS证书的问题需要去升级pip，升pip的时候又因为TLS证书的原因不能下载最新版本的pip。这时候就没有办法了，只能手动的去升级 <code class="highlighter-rouge">pip</code>。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">mac</code> 或者 <code class="highlighter-rouge">linux</code> 操作系统：在终端下执行命令：</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://bootstrap.pypa.io/get-pip.py | python3
+</code></pre></div>    </div>
+    <p>windows操作系统：从https://bootstrap.pypa.io/get-pip.py下载 <code class="highlighter-rouge">get-pip.py</code> 文件，然后使用 python 或 python3 运行这个文件 get-pip.py 即可。</p>
+  </li>
+</ol>
+
 </div>
     </div>
 </main>
@@ -159,6 +117,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>
