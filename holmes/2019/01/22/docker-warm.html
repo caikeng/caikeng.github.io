@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ffmpeg, hls, introduce, sticky, Java, Logback, Python, Flash, Http, Redis, Mysql, docker, registry, swarm, python, pip, idea, jetbrains"/>
+    <meta name="keywords" content="docker, swarm"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
-    <title>caikeng</title>
-    <meta name="description" content="踩坑之路">
-    <link rel="canonical" href="http://localhost:4000/404.html" />
+    <title>docker swarm加入集群失败</title>
+    <meta name="description" content="问题描述:">
+    <link rel="canonical" href="http://localhost:4000/holmes/2019/01/22/docker-warm.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -44,7 +46,43 @@
 <br/>
 <main>
     <div class="container">
-        404!
+        
+<div class="row">
+<h2>docker swarm加入集群失败</h2>
+<div class="valign-wrapper">
+<div class="author"><img src="/img/holmes.png" class="circle responsive-img"></div> <h5><a href="/categories/Holmes">Holmes</a> - 01/22/2019</h5>
+</div>
+    
+    
+    <a href="/tags/docker"><div class="chip waves-effect waves-red">docker</div></a>
+    
+    
+    
+    <a href="/tags/swarm"><div class="chip waves-effect waves-red">swarm</div></a>
+    
+    
+</div>
+<div class="row">
+<p><strong>问题描述:</strong></p>
+
+<p>​	通过命令docker swarm join加入到docker集群中的manager节点。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error response from daemon: error <span class="k">while </span>validating Root CA Certificate: x509: certificate has expired or is not yet valid
+</code></pre></div></div>
+
+<p><strong>原因:</strong>
+	docker swarm node之间是加密传输，docker swarm init时会创建CA证书。这里提示证书过期，可能是主机之间当前时间不一致。</p>
+
+<p><strong>解决步骤:</strong></p>
+
+<ol>
+  <li>通过date命令查看各个主机的当前时间，发现时间不一致；</li>
+  <li>在各个主机上执行命令ntpdate cn.pool.ntp.org&amp;&amp; hwclock –systohc同步当前系统时间。如果ntpdate命令未找到，执行命令yum install ntp进行安装；</li>
+  <li>在manager节点上执行命令docker swarm leave manager离开集群，docker swarm init重新初始化集群，然后worker节点加入集群。因为时间改变，证书失效，重新初始化生成证书；</li>
+</ol>
+
+
+</div>
     </div>
 </main>
 <footer class="page-footer">
@@ -76,6 +114,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>

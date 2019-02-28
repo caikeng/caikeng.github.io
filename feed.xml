@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-23T19:18:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">pip3 安装 module 失败</title><link href="http://localhost:4000/brandon/2019/01/23/pip3-error.html" rel="alternate" type="text/html" title="pip3 安装 module 失败" /><published>2019-01-23T00:00:00+08:00</published><updated>2019-01-23T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/23/pip3-error</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/23/pip3-error.html">&lt;p&gt;mac 操作系统， pip3 安装 flask 模块报错: &lt;strong&gt;[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version&lt;/strong&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-28T16:06:33+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">caikeng</title><subtitle>踩坑之路</subtitle><entry><title type="html">idea debug 卡顿</title><link href="http://localhost:4000/brandon/2019/02/28/idea-debug-slow.html" rel="alternate" type="text/html" title="idea debug 卡顿" /><published>2019-02-28T00:00:00+08:00</published><updated>2019-02-28T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/02/28/idea-debug-slow</id><content type="html" xml:base="http://localhost:4000/brandon/2019/02/28/idea-debug-slow.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;使用 IntelliJ IDEA Debug 代码时，经常在”Finishd, saving caches” 卡上很长时间。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;原因:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不明
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;编辑 hosts 文件，在 localhost 后面加上主机名&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt; 127.0.0.1 localhost &amp;lt;your hostname&amp;gt;
+ ::1 localhost &amp;lt;your hostname&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;参考链接：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;https://stackoverflow.com/questions/20658400/intellij-idea-hangs-while-finished-saving-caches&lt;/p&gt;</content><author><name></name></author><category term="idea" /><category term="jetbrains" /><summary type="html">问题描述:</summary></entry><entry><title type="html">pip3 安装 module 失败</title><link href="http://localhost:4000/brandon/2019/01/23/pip3-error.html" rel="alternate" type="text/html" title="pip3 安装 module 失败" /><published>2019-01-23T00:00:00+08:00</published><updated>2019-01-23T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/23/pip3-error</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/23/pip3-error.html">&lt;p&gt;mac 操作系统， pip3 安装 flask 模块报错: &lt;strong&gt;[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;issuserdeMacBook-Pro:~ issuser&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip3 &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;flask
 Collecting flask
   Could not fetch URL https://pypi.python.org/simple/flask/: There was a problem confirming the ssl certificate: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;_ssl.c:590&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - skipping
@@ -18,7 +37,23 @@ No matching distribution found &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;windows操作系统：从https://bootstrap.pypa.io/get-pip.py下载 &lt;code class=&quot;highlighter-rouge&quot;&gt;get-pip.py&lt;/code&gt; 文件，然后使用 python 或 python3 运行这个文件 get-pip.py 即可。&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><category term="python" /><category term="pip" /><summary type="html">mac 操作系统， pip3 安装 flask 模块报错: [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version issuserdeMacBook-Pro:~ issuser$ pip3 install flask Collecting flask Could not fetch URL https://pypi.python.org/simple/flask/: There was a problem confirming the ssl certificate: [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:590) - skipping Could not find a version that satisfies the requirement flask (from versions: ) No matching distribution found for flask</summary></entry><entry><title type="html">上传镜像到私有仓库</title><link href="http://localhost:4000/holmes/2019/01/21/push-image-registry.html" rel="alternate" type="text/html" title="上传镜像到私有仓库" /><published>2019-01-21T00:00:00+08:00</published><updated>2019-01-21T00:00:00+08:00</updated><id>http://localhost:4000/holmes/2019/01/21/push-image-registry</id><content type="html" xml:base="http://localhost:4000/holmes/2019/01/21/push-image-registry.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="python" /><category term="pip" /><summary type="html">mac 操作系统， pip3 安装 flask 模块报错: [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version issuserdeMacBook-Pro:~ issuser$ pip3 install flask Collecting flask Could not fetch URL https://pypi.python.org/simple/flask/: There was a problem confirming the ssl certificate: [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:590) - skipping Could not find a version that satisfies the requirement flask (from versions: ) No matching distribution found for flask</summary></entry><entry><title type="html">docker swarm加入集群失败</title><link href="http://localhost:4000/holmes/2019/01/22/docker-warm.html" rel="alternate" type="text/html" title="docker swarm加入集群失败" /><published>2019-01-22T00:00:00+08:00</published><updated>2019-01-22T00:00:00+08:00</updated><id>http://localhost:4000/holmes/2019/01/22/docker-warm</id><content type="html" xml:base="http://localhost:4000/holmes/2019/01/22/docker-warm.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​	通过命令docker swarm join加入到docker集群中的manager节点。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error response from daemon: error &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;validating Root CA Certificate: x509: certificate has expired or is not yet valid
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;原因:&lt;/strong&gt;
+	docker swarm node之间是加密传输，docker swarm init时会创建CA证书。这里提示证书过期，可能是主机之间当前时间不一致。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;通过date命令查看各个主机的当前时间，发现时间不一致；&lt;/li&gt;
+  &lt;li&gt;在各个主机上执行命令ntpdate cn.pool.ntp.org&amp;amp;&amp;amp; hwclock –systohc同步当前系统时间。如果ntpdate命令未找到，执行命令yum install ntp进行安装；&lt;/li&gt;
+  &lt;li&gt;在manager节点上执行命令docker swarm leave manager离开集群，docker swarm init重新初始化集群，然后worker节点加入集群。因为时间改变，证书失效，重新初始化生成证书；&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="docker" /><category term="swarm" /><summary type="html">问题描述:</summary></entry><entry><title type="html">上传镜像到私有仓库</title><link href="http://localhost:4000/holmes/2019/01/21/push-image-registry.html" rel="alternate" type="text/html" title="上传镜像到私有仓库" /><published>2019-01-21T00:00:00+08:00</published><updated>2019-01-21T00:00:00+08:00</updated><id>http://localhost:4000/holmes/2019/01/21/push-image-registry</id><content type="html" xml:base="http://localhost:4000/holmes/2019/01/21/push-image-registry.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;​	通过命令行docker push 192.168.215.200:5000/java:latest将镜像推送到另一台主机搭建的私有仓库中。&lt;/p&gt;
 
@@ -280,41 +315,4 @@ No matching distribution found &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;
 &lt;h4 id=&quot;补充&quot;&gt;补充&lt;/h4&gt;
 
 &lt;p&gt;那么有没有定时生成日志的配置？
-效果是：到了0点必须生成前一天的日志。&lt;/p&gt;</content><author><name></name></author><category term="Java" /><category term="Logback" /><summary type="html">Java 项目，使用 Logback 按天轮换日志，配置如下所示，问题是有时无法看到前一天生成的日志。 &amp;lt;appender name=&quot;INFO_LOG_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&amp;gt; &amp;lt;file&amp;gt;${LOG_PATH}/info.log&amp;lt;/file&amp;gt; &amp;lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&amp;gt; &amp;lt;fileNamePattern&amp;gt;${LOG_PATH}/info/{yyyy-MM-dd}_info.log&amp;lt;/fileNamePattern&amp;gt; &amp;lt;maxHistory&amp;gt;30&amp;lt;/maxHistory&amp;gt; &amp;lt;/rollingPolicy&amp;gt; &amp;lt;append&amp;gt;true&amp;lt;/append&amp;gt; &amp;lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&amp;gt; &amp;lt;Pattern&amp;gt;${format}&amp;lt;/Pattern&amp;gt; &amp;lt;charset&amp;gt;utf8&amp;lt;/charset&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&amp;gt; &amp;lt;level&amp;gt;info&amp;lt;/level&amp;gt; &amp;lt;onMatch&amp;gt;ACCEPT&amp;lt;/onMatch&amp;gt; &amp;lt;onMismatch&amp;gt;DENY&amp;lt;/onMismatch&amp;gt; &amp;lt;/filter&amp;gt; &amp;lt;/appender&amp;gt;</summary></entry><entry><title type="html">Welcome to CaiKeng!</title><link href="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html" rel="alternate" type="text/html" title="Welcome to CaiKeng!" /><published>2019-01-01T00:00:00+08:00</published><updated>2019-01-01T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html">&lt;p&gt;欢迎来到踩坑，这是一个分享踩坑经历的地方。&lt;/p&gt;</content><author><name></name></author><category term="introduce" /><category term="sticky" /><summary type="html">欢迎来到踩坑，这是一个分享踩坑经历的地方。</summary></entry><entry><title type="html">ffmpeg 转换 mp4 自定义start的值</title><link href="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html" rel="alternate" type="text/html" title="ffmpeg 转换 mp4 自定义start的值" /><published>2018-12-26T00:00:00+08:00</published><updated>2018-12-26T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2018/12/26/ffmpeg-start</id><content type="html" xml:base="http://localhost:4000/brandon/2018/12/26/ffmpeg-start.html">&lt;p&gt;&lt;strong&gt;问题描述:&lt;/strong&gt;
-一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;解决步骤:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;从网上找了一段正常的视频，使用 ffmpeg 对比了正常的视频各个 ts 文件的元数据和本地不正常的视频各个 ts 文件的元数据。
-发现正常视频片段的 start 值是连续的，不正常的视频片段的 start 值都是固定的，由此认为 start 决定了进度条的初始位置。&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ffmpeg version 4.1-tessus  https://evermeet.cx/ffmpeg/  Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000-2018 the FFmpeg developers
-   built with Apple LLVM version 10.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-1000.11.45.5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-   configuration: &lt;span class=&quot;nt&quot;&gt;--cc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/bin/clang &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/ffmpeg &lt;span class=&quot;nt&quot;&gt;--extra-version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;tessus &lt;span class=&quot;nt&quot;&gt;--enable-avisynth&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-fontconfig&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-gpl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libaom&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libass&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libbluray&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libfreetype&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libgsm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmodplug&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmp3lame&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libmysofa&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopencore-amrnb&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopencore-amrwb&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libopus&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-librubberband&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libshine&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libsnappy&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libsoxr&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libspeex&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libtheora&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libtwolame&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvidstab&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvo-amrwbenc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvorbis&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libvpx&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libwavpack&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libx264&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libx265&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libxavs&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libxvid&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzimg&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzmq&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-libzvbi&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--enable-version3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pkg-config-flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--static&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--disable-ffplay&lt;/span&gt;
-   libavutil      56. 22.100 / 56. 22.100
-   libavcodec     58. 35.100 / 58. 35.100
-   libavformat    58. 20.100 / 58. 20.100
-   libavdevice    58.  5.100 / 58.  5.100
-   libavfilter     7. 40.101 /  7. 40.101
-   libswscale      5.  3.100 /  5.  3.100
-   libswresample   3.  3.100 /  3.  3.100
-   libpostproc    55.  3.100 / 55.  3.100
- Input &lt;span class=&quot;c&quot;&gt;#0, mpegts, from 'b.ts':&lt;/span&gt;
-   Duration: 00:00:10.00, start: 11.400000
-   , bitrate: 1879 kb/s
-   Program 1 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;想修改视频的 start 值， 经高人指点发现使用如下方式可以修改。
-这条命令是将 mp4 文件转换为 ts 文件，同时使用 &lt;strong&gt;initial_offset&lt;/strong&gt; 参数指定第一个视频文件的 start 值。&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 0.mp4 &lt;span class=&quot;nt&quot;&gt;-vcodec&lt;/span&gt; copy &lt;span class=&quot;nt&quot;&gt;-acodec&lt;/span&gt; aac &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; segment &lt;span class=&quot;nt&quot;&gt;-initial_offset&lt;/span&gt; 9.5 &lt;span class=&quot;nt&quot;&gt;-segment_format&lt;/span&gt; mpegts out%d.ts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用如上配置生成的 ts 文件播放后进度条就不跳跃了，问题得到解决。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><category term="ffmpeg" /><category term="hls" /><summary type="html">问题描述: 一段 mp4 视频由很多片段组成，使用 ffmpeg 将各个 mp4 片段文件转换为 ts 文件，之后使用 hls 协议播放一整段视频。发现进度条一直在前几秒循环式地跳。</summary></entry></feed>
+效果是：到了0点必须生成前一天的日志。&lt;/p&gt;</content><author><name></name></author><category term="Java" /><category term="Logback" /><summary type="html">Java 项目，使用 Logback 按天轮换日志，配置如下所示，问题是有时无法看到前一天生成的日志。 &amp;lt;appender name=&quot;INFO_LOG_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&amp;gt; &amp;lt;file&amp;gt;${LOG_PATH}/info.log&amp;lt;/file&amp;gt; &amp;lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&amp;gt; &amp;lt;fileNamePattern&amp;gt;${LOG_PATH}/info/{yyyy-MM-dd}_info.log&amp;lt;/fileNamePattern&amp;gt; &amp;lt;maxHistory&amp;gt;30&amp;lt;/maxHistory&amp;gt; &amp;lt;/rollingPolicy&amp;gt; &amp;lt;append&amp;gt;true&amp;lt;/append&amp;gt; &amp;lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&amp;gt; &amp;lt;Pattern&amp;gt;${format}&amp;lt;/Pattern&amp;gt; &amp;lt;charset&amp;gt;utf8&amp;lt;/charset&amp;gt; &amp;lt;/encoder&amp;gt; &amp;lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&amp;gt; &amp;lt;level&amp;gt;info&amp;lt;/level&amp;gt; &amp;lt;onMatch&amp;gt;ACCEPT&amp;lt;/onMatch&amp;gt; &amp;lt;onMismatch&amp;gt;DENY&amp;lt;/onMismatch&amp;gt; &amp;lt;/filter&amp;gt; &amp;lt;/appender&amp;gt;</summary></entry><entry><title type="html">Welcome to CaiKeng!</title><link href="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html" rel="alternate" type="text/html" title="Welcome to CaiKeng!" /><published>2019-01-01T00:00:00+08:00</published><updated>2019-01-01T00:00:00+08:00</updated><id>http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng</id><content type="html" xml:base="http://localhost:4000/brandon/2019/01/01/welcome-to-caikeng.html">&lt;p&gt;欢迎来到踩坑，这是一个分享踩坑经历的地方。&lt;/p&gt;</content><author><name></name></author><category term="introduce" /><category term="sticky" /><summary type="html">欢迎来到踩坑，这是一个分享踩坑经历的地方。</summary></entry></feed>

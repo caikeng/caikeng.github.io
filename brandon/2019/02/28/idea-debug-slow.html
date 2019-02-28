@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ffmpeg, hls, introduce, sticky, Java, Logback, Python, Flash, Http, Redis, Mysql, docker, registry, swarm, python, pip, idea, jetbrains"/>
+    <meta name="keywords" content="idea, jetbrains"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png">
-    <title>caikeng</title>
-    <meta name="description" content="踩坑之路">
-    <link rel="canonical" href="http://localhost:4000/404.html" />
+    <title>idea debug 卡顿</title>
+    <meta name="description" content="问题描述:">
+    <link rel="canonical" href="http://localhost:4000/brandon/2019/02/28/idea-debug-slow.html" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="/css/main.css">
+	
+	<link rel="stylesheet" href="/css/prism.css">
 	
     <link rel="alternate" type="application/rss+xml" title="caikeng" href="/feed.xml" />
 </head>
@@ -44,7 +46,45 @@
 <br/>
 <main>
     <div class="container">
-        404!
+        
+<div class="row">
+<h2>idea debug 卡顿</h2>
+<div class="valign-wrapper">
+<div class="author"><img src="/img/brandon.png" class="circle responsive-img"></div> <h5><a href="/categories/Brandon">Brandon</a> - 02/28/2019</h5>
+</div>
+    
+    
+    <a href="/tags/idea"><div class="chip waves-effect waves-red">idea</div></a>
+    
+    
+    
+    <a href="/tags/jetbrains"><div class="chip waves-effect waves-red">jetbrains</div></a>
+    
+    
+</div>
+<div class="row">
+<p><strong>问题描述:</strong></p>
+
+<p>使用 IntelliJ IDEA Debug 代码时，经常在”Finishd, saving caches” 卡上很长时间。</p>
+
+<p><strong>原因:</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>不明
+</code></pre></div></div>
+
+<p><strong>解决步骤:</strong></p>
+
+<p>编辑 hosts 文件，在 localhost 后面加上主机名</p>
+
+<pre><code class="language-txt"> 127.0.0.1 localhost &lt;your hostname&gt;
+ ::1 localhost &lt;your hostname&gt;
+</code></pre>
+
+<p><strong>参考链接：</strong></p>
+
+<p>https://stackoverflow.com/questions/20658400/intellij-idea-hangs-while-finished-saving-caches</p>
+
+</div>
     </div>
 </main>
 <footer class="page-footer">
@@ -76,6 +116,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js" defer></script>
 <script src="/js/load.js" defer></script>
+
+<script src="/js/prism.js"></script>
 
 </body>
 </html>
